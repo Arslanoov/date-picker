@@ -2,7 +2,7 @@
 
 Install
 
-    ts-date-picker
+    npm i ts-date-picker
 
 Setup
 
