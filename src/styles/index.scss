@@ -121,7 +121,20 @@
     }
 
     &__footer {
+      padding: 10px 0;
+    }
 
+    &__today-button {
+      padding: 5px 15px;
+
+      font-size: inherit;
+
+      background-color: rgba(#eaeaea, .2);
+
+      border: 1px solid #6d10b4;
+      outline: 0;
+
+      @include pointer-on-hover();
     }
   }
 }

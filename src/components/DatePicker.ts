@@ -9,7 +9,6 @@ class DatePicker {
   private readonly days: string[]
   private readonly months: string[]
   private readonly rendered: HTMLElement
-  private renderedBoxes: HTMLElement[]
   private wrapper: string | null
 
   public constructor(input: HTMLElement, config: DatePickerConfig, days: string[], months: string[]) {
@@ -24,7 +23,6 @@ class DatePicker {
     }
     this.months = months
     this.rendered = document.createElement("div")
-    this.renderedBoxes = []
     this.wrapper = null
     this.init()
   }
@@ -50,8 +48,11 @@ class DatePicker {
     const input: HTMLInputElement | null = document.querySelector(selector)
     if (wrapper && input) {
       wrapper.appendChild(this.rendered)
+      wrapper.addEventListener("mouseleave", () => {
+        this.close()
+        input.blur()
+      })
       input.addEventListener("focus", () => this.open())
-      wrapper.addEventListener("mouseleave", () => this.close())
       this.wrapper = wrapperSelector
     }
   }
@@ -64,18 +65,29 @@ class DatePicker {
     this.changeMonth(this.currentDay.getMonth() + 1)
   }
 
+  public today(): void {
+    this.config.currentDay = new Date()
+    this.rerender()
+  }
+
   public changeMonth(newMonth: number): void {
     this.currentDay.setMonth(newMonth)
+    this.rerender()
+  }
+
+  public rerender(): void {
     this.rerenderHeader()
     this.rerenderBoxes()
+    this.rerenderFooter()
   }
 
   private init(): void {
     this.rendered.classList.add("a-date-picker")
     this.rendered.classList.add("a-date-picker_closed")
-    this.renderHeader()
-    this.renderBoxes()
+    this.rerender()
   }
+
+  // Header
 
   private renderHeader(): void {
     const header = document.createElement("div")
@@ -102,6 +114,8 @@ class DatePicker {
     this.renderHeader()
   }
 
+  // Arrows
+
   private renderLeftArrow(): HTMLElement {
     const arrow = this.renderArrow()
     arrow.classList.add("a-date-picker__arrow_left")
@@ -124,6 +138,37 @@ class DatePicker {
     return arrow
   }
 
+  // Footer
+  private renderFooter(): void {
+    const footer = document.createElement("div")
+    footer.classList.add("a-date-picker__footer")
+
+    if (this.config.todayButton.enabled) {
+      const todayButton = document.createElement("button")
+      todayButton.classList.add("a-date-picker__today-button")
+      todayButton.addEventListener("click", () => this.today())
+      todayButton.innerText = this.config.todayButton.text || ""
+
+      footer.appendChild(todayButton)
+    }
+
+    this.rendered.appendChild(footer)
+  }
+
+  private destroyFooter(): void {
+    const element = document.querySelector(`${this.wrapper} .a-date-picker__footer`)
+    if (element) {
+      element.remove()
+    }
+  }
+
+  private rerenderFooter(): void {
+    this.destroyFooter()
+    this.renderFooter()
+  }
+
+  // Boxes
+
   private rerenderBoxes(): void {
     this.destroyBoxes()
     this.renderBoxes()
@@ -143,9 +188,7 @@ class DatePicker {
 
     for (let i = 0; i < this.days.length; i++) {
       const box = new WeekDayBox(this.days[i])
-      const rendered = box.render()
-      this.renderedBoxes.push(rendered)
-      wrapper.appendChild(rendered)
+      wrapper.appendChild(box.render())
     }
 
     const firstDate = (new Date(

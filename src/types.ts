@@ -1,3 +1,7 @@
 export interface DatePickerConfig {
-  currentDay: Date
+  currentDay: Date,
+  todayButton: {
+    enabled: boolean,
+    text?: string
+  }
 }

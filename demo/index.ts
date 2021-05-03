@@ -3,7 +3,11 @@ import "./index.scss"
 import DatePicker from "../src"
 
 const picker: DatePicker = new DatePicker(document.querySelector("#input") as HTMLElement, {
-  currentDay: new Date()
+  currentDay: new Date(),
+  todayButton: {
+    enabled: true,
+    text: "Today"
+  }
 }, ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"], [
   "Январь",
   "Февраль",
