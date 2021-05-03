@@ -12,6 +12,7 @@ const months: string[] = [
 
 const picker: DatePicker = new DatePicker(document.querySelector("#input") as HTMLElement, {
   currentDay: new Date(),
+  onChange: (date: Date) => console.log(`Date: ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`),
   picker: {
     inputHeight: "25px"
   },

@@ -1,8 +1,9 @@
+import { addStyles } from "../helpers/styles"
+
 import { DatePickerConfig } from "../types"
 
 import DateBox from "./DateBox"
 import WeekDayBox from "./WeekDayBox"
-import {addStyles} from "../helpers/styles";
 
 class DatePicker {
   private readonly input: HTMLElement
@@ -85,6 +86,7 @@ class DatePicker {
   private init(): void {
     this.rendered.classList.add("a-date-picker")
     this.rendered.classList.add("a-date-picker_closed")
+    this.rendered.classList.remove("a-date-picker_not-opened")
     addStyles(this.rendered, {
       ...this.config.picker?.styles,
       top: this.config.picker.inputHeight
@@ -220,6 +222,8 @@ class DatePicker {
       if (k === 0) {
         rendered.classList.add(`a-date-picker__date_${firstDate.getDay() + 1}`)
       }
+
+      rendered.addEventListener("click", () => this.config.onChange(box.value))
 
       wrapper.appendChild(rendered)
     }

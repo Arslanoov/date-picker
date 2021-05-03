@@ -2,6 +2,7 @@ import * as CSS from "csstype"
 
 export interface DatePickerConfig {
   currentDay: Date,
+  onChange: (date: Date) => void,
   picker: {
     styles?: CSS.Properties,
     inputHeight: string
