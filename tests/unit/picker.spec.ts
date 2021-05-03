@@ -20,7 +20,7 @@ describe("date picker",  () => {
   it("success create", () => {
     const currentDay = new Date()
     const picker: DatePicker = new DatePicker(
-      document.createElement("input"), {
+       {
       currentDay,
       onChange: () => {},
       picker: {
@@ -35,7 +35,7 @@ describe("date picker",  () => {
   })
 
   it("fails to create picker: invalid days count",  () => {
-    const create = () => new DatePicker(document.createElement("input"),{
+    const create = () => new DatePicker({
       currentDay: new Date(),
       onChange: () => {},
       picker: {
@@ -50,7 +50,7 @@ describe("date picker",  () => {
   })
 
   it("fails to create picker: invalid months count",  () => {
-    const create = () => new DatePicker(document.createElement("input"),{
+    const create = () => new DatePicker({
       currentDay: new Date(),
       onChange: () => {},
       picker: {
@@ -67,7 +67,7 @@ describe("date picker",  () => {
   it("changes months, picks today date", () => {
     const currentDay = new Date("05.03.2021")
     const picker: DatePicker = new DatePicker(
-      document.createElement("input"), {
+       {
         currentDay,
         onChange: () => {},
         picker: {
