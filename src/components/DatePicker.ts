@@ -6,15 +6,13 @@ import DateBox from "./DateBox"
 import WeekDayBox from "./WeekDayBox"
 
 class DatePicker {
-  private readonly input: HTMLElement
   private readonly config: DatePickerConfig
   private readonly days: string[]
   private readonly months: string[]
   private readonly rendered: HTMLElement
   private wrapper: string | null
 
-  public constructor(input: HTMLElement, config: DatePickerConfig, days: string[], months: string[]) {
-    this.input = input
+  public constructor(config: DatePickerConfig, days: string[], months: string[]) {
     this.config = config
     if (days.length !== 7) {
       throw new TypeError("Days count should be 7")
