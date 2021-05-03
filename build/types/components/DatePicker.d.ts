@@ -1,12 +1,11 @@
 import { DatePickerConfig } from "../types";
 declare class DatePicker {
-    private readonly input;
     private readonly config;
     private readonly days;
     private readonly months;
     private readonly rendered;
     private wrapper;
-    constructor(input: HTMLElement, config: DatePickerConfig, days: string[], months: string[]);
+    constructor(config: DatePickerConfig, days: string[], months: string[]);
     open(): void;
     close(): void;
     get currentDay(): Date;
