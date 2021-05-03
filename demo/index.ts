@@ -10,7 +10,7 @@ const months: string[] = [
   "Октябрь", "Ноябрь", "Декабрь"
 ]
 
-const picker: DatePicker = new DatePicker(document.querySelector("#input") as HTMLElement, {
+const picker: DatePicker = new DatePicker( {
   currentDay: new Date(),
   onChange: (date: Date) => console.log(`Date: ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`),
   picker: {
