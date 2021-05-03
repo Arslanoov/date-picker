@@ -1,11 +1,70 @@
+@import "mixins";
+
 .a {
   &-date-picker {
+    position: absolute;
+
+    // TODO: Input height
+    top: 25px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transition: opacity .5s;
+
+    &_closed {
+      opacity: 0;
+    }
+
+    &_opened {
+      opacity: 1;
+    }
+
+    &_not-opened {
+      display: none;
+    }
+
     &__header {
 
     }
 
     &__content {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-auto-rows: 1fr;
 
+      column-gap: 3px;
+      row-gap: 3px;
+
+      padding: 5px;
+
+      border: 1px solid #2630eb;
+    }
+
+    &__weekday,
+    &__date {
+      text-align: center;
+
+      padding: 5px;
+    }
+
+    &__weekday {
+      font-weight: 700;
+    }
+
+    &__date {
+      background-color: rgba(#eaeaea, .4);
+
+      border: 1px solid #9526eb;
+
+      @include pointer-on-hover();
+
+      &_today {
+        border: 1px solid darken(#9526eb, .1);
+      }
     }
 
     &__footer {

@@ -1,8 +1,8 @@
 import "./index.scss"
 
-import DatePicker from "../src/components/DatePicker"
+import DatePicker from "../src"
 
-const picker: DatePicker = new DatePicker({
+const picker: DatePicker = new DatePicker(document.querySelector("#input") as HTMLElement, {
   currentDay: new Date()
 }, ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"], [
   "Январь",
@@ -19,4 +19,4 @@ const picker: DatePicker = new DatePicker({
   "Декабрь"
 ])
 
-picker.mount("#app")
+picker.mount("#input", "#picker")
