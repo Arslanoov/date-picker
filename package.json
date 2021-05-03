@@ -48,7 +48,12 @@
     "javascript",
     "js",
     "ts",
-    "es6"
+    "es6",
+    "date",
+    "picker",
+    "date picker",
+    "simple date picker",
+    "ts date picker"
   ],
   "license": "MIT"
 }
