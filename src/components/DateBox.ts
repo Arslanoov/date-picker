@@ -7,11 +7,15 @@ class DateBox {
     this.element = null
   }
 
+  public static formatDate(date: Date): string {
+    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+  }
+
   public render(): HTMLElement {
     const box = document.createElement("div")
     box.classList.add("a-date-picker__date")
     // TODO: Today date as parameter
-    if (this.date.getUTCDate() === (new Date()).getUTCDate()) {
+    if (DateBox.formatDate(this.date) === DateBox.formatDate(new Date())) {
       box.classList.add("a-date-picker__date_today")
     }
     box.innerText = String(this.date.getDate())
