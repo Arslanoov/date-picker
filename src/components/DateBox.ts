@@ -12,7 +12,7 @@ class DateBox {
   }
 
   public static formatDate(date: Date): string {
-    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+    return `${date.getMonth() + 1}.${date.getDate()}.${date.getFullYear()}`
   }
 
   public render(styles: CSS.Properties = {}, todayStyles: CSS.Properties = {}): HTMLElement {

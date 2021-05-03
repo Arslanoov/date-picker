@@ -17,4 +17,11 @@ describe("date box",  () => {
 
     expect(box.rendered).not.toBeNull()
   })
+
+  it("formats dates", () => {
+    const formatted = "3.11.2021"
+    const date = new Date(formatted)
+
+    expect(DateBox.formatDate(date)).toEqual(formatted)
+  })
 })
