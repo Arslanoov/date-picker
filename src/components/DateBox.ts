@@ -1,5 +1,5 @@
 class DateBox {
-  private date: Date
+  private readonly date: Date
   private element: HTMLElement | null
 
   constructor(date: Date) {
@@ -10,6 +10,10 @@ class DateBox {
   public render(): HTMLElement {
     const box = document.createElement("div")
     box.classList.add("a-date-picker__date")
+    // TODO: Today date as parameter
+    if (this.date.getUTCDate() === (new Date()).getUTCDate()) {
+      box.classList.add("a-date-picker__date_today")
+    }
     box.innerText = String(this.date.getDate())
     this.element = box
     return box

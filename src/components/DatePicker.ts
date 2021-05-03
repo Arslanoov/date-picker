@@ -1,6 +1,7 @@
 import { DatePickerConfig } from "../types"
 
 import DateBox from "./DateBox"
+import WeekDayBox from "./WeekDayBox";
 
 class DatePicker {
   private readonly input: HTMLElement
@@ -46,16 +47,21 @@ class DatePicker {
     const wrapper = document.createElement("div")
     wrapper.classList.add("a-date-picker__content")
 
+    for (let i = 0; i < this.days.length; i++) {
+      const box = new WeekDayBox(this.days[i])
+      wrapper.appendChild(box.render())
+    }
+
     const daysCount = (new Date(
       this.config.currentDay.getFullYear(),
       this.config.currentDay.getMonth(),
       0
     )).getDate()
-    for (let i = 0; i < daysCount + 1; i++) {
+    for (let k = 0; k < daysCount + 1; k++) {
       const box = new DateBox(new Date(
         this.config.currentDay.getFullYear(),
         this.config.currentDay.getMonth(),
-        i === 0 ? daysCount : i
+        k === 0 ? daysCount : k
       ))
 
       wrapper.appendChild(box.render())

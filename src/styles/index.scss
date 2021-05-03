@@ -39,16 +39,32 @@
       column-gap: 3px;
       row-gap: 3px;
 
+      padding: 5px;
+
       border: 1px solid #2630eb;
     }
 
+    &__weekday,
     &__date {
       text-align: center;
+
       padding: 5px;
+    }
+
+    &__weekday {
+      font-weight: 700;
+    }
+
+    &__date {
+      background-color: rgba(#eaeaea, .4);
 
       border: 1px solid #9526eb;
 
       @include pointer-on-hover();
+
+      &_today {
+        border: 1px solid darken(#9526eb, .1);
+      }
     }
 
     &__footer {
