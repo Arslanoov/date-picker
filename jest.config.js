@@ -2,7 +2,7 @@ module.exports = {
   roots: ["<rootDir>/tests"],
 
   preset: "ts-jest",
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
 
   globals: {
     "ts-jest": {

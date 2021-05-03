@@ -15,3 +15,20 @@ body {
 * {
   box-sizing: inherit;
 }
+
+// Calendar wrapper
+#picker {
+  position: relative;
+
+  display: inline-flex;
+
+  margin: 15px;
+}
+
+#input {
+  min-width: 250px;
+
+  padding: 5px 10px;
+
+  border: 1px solid #9526eb;
+}

@@ -19,7 +19,8 @@ const correctMonths: string[] = [
 describe("date picker",  () => {
   it("success create", () => {
     const currentDay = new Date()
-    const picker: DatePicker = new DatePicker({
+    const picker: DatePicker = new DatePicker(
+      document.createElement("input"),{
       currentDay
     }, correctDays, correctMonths)
 
@@ -27,7 +28,7 @@ describe("date picker",  () => {
   })
 
   it("fails to create picker: invalid days count",  () => {
-    const create = () => new DatePicker({
+    const create = () => new DatePicker(document.createElement("input"),{
       currentDay: new Date()
     }, ["Пн", "Вт", "Ср"], correctMonths)
 
@@ -35,7 +36,7 @@ describe("date picker",  () => {
   })
 
   it("fails to create picker: invalid months count",  () => {
-    const create = () => new DatePicker({
+    const create = () => new DatePicker(document.createElement("input"),{
       currentDay: new Date()
     }, correctDays, ["Январь"])
 
