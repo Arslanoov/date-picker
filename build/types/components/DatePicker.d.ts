@@ -1,0 +1,33 @@
+import { DatePickerConfig } from "../types";
+declare class DatePicker {
+    private readonly input;
+    private readonly config;
+    private readonly days;
+    private readonly months;
+    private readonly rendered;
+    private wrapper;
+    constructor(input: HTMLElement, config: DatePickerConfig, days: string[], months: string[]);
+    open(): void;
+    close(): void;
+    get currentDay(): Date;
+    mount(selector: string, wrapperSelector: string): void;
+    prevMonth(): void;
+    nextMonth(): void;
+    today(): void;
+    changeMonth(newMonth: number): void;
+    rerender(): void;
+    private init;
+    private renderHeader;
+    private destroyHeader;
+    private rerenderHeader;
+    private renderLeftArrow;
+    private renderRightArrow;
+    private renderArrow;
+    private renderFooter;
+    private destroyFooter;
+    private rerenderFooter;
+    private rerenderBoxes;
+    private destroyBoxes;
+    private renderBoxes;
+}
+export default DatePicker;

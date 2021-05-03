@@ -1,3 +1,7 @@
+import * as CSS from "csstype"
+
+import { addStyles } from "../helpers/styles"
+
 class WeekDayBox {
   private readonly weekDay: string
   private element: HTMLElement | null
@@ -7,10 +11,11 @@ class WeekDayBox {
     this.element = null
   }
 
-  public render(): HTMLElement {
+  public render(styles: CSS.Properties = {}): HTMLElement {
     const box = document.createElement("div")
     box.classList.add("a-date-picker__weekday")
     box.innerText = this.weekDay
+    addStyles(box, styles)
     this.element = box
     return box
   }

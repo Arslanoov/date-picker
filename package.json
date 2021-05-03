@@ -1,5 +1,5 @@
 {
-  "name": "ts-library-template",
+  "name": "ts-date-picker",
   "version": "0.1.0",
   "description": "TS Library template",
   "main": "./build/index.js",
