@@ -1,3 +1,7 @@
+import * as CSS from "csstype"
+
+import { addStyles } from "../helpers/styles"
+
 class DateBox {
   private readonly date: Date
   private element: HTMLElement | null
@@ -11,13 +15,16 @@ class DateBox {
     return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
   }
 
-  public render(): HTMLElement {
+  public render(styles: CSS.Properties = {}, todayStyles: CSS.Properties = {}): HTMLElement {
     const box = document.createElement("div")
     box.classList.add("a-date-picker__date")
-    // TODO: Today date as parameter
+    addStyles(box, styles)
+
     if (DateBox.formatDate(this.date) === DateBox.formatDate(new Date())) {
       box.classList.add("a-date-picker__date_today")
+      addStyles(box, todayStyles)
     }
+
     box.innerText = String(this.date.getDate())
     this.element = box
     return box

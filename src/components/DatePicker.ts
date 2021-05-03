@@ -1,7 +1,8 @@
 import { DatePickerConfig } from "../types"
 
 import DateBox from "./DateBox"
-import WeekDayBox from "./WeekDayBox";
+import WeekDayBox from "./WeekDayBox"
+import {addStyles} from "../helpers/styles";
 
 class DatePicker {
   private readonly input: HTMLElement
@@ -84,6 +85,10 @@ class DatePicker {
   private init(): void {
     this.rendered.classList.add("a-date-picker")
     this.rendered.classList.add("a-date-picker_closed")
+    addStyles(this.rendered, {
+      ...this.config.picker?.styles,
+      top: this.config.picker.inputHeight
+    })
     this.rerender()
   }
 
@@ -98,6 +103,8 @@ class DatePicker {
     header.appendChild(this.renderLeftArrow())
     header.appendChild(date)
     header.appendChild(this.renderRightArrow())
+
+    addStyles(header, this.config.header?.styles)
 
     this.rendered.appendChild(header)
   }
@@ -119,7 +126,7 @@ class DatePicker {
   private renderLeftArrow(): HTMLElement {
     const arrow = this.renderArrow()
     arrow.classList.add("a-date-picker__arrow_left")
-    arrow.innerText = "<---"
+    arrow.innerText = this.config.arrows?.leftArrowContent || "<---"
     arrow.addEventListener("click", () => this.prevMonth())
     return arrow
   }
@@ -127,7 +134,7 @@ class DatePicker {
   private renderRightArrow(): HTMLElement {
     const arrow = this.renderArrow()
     arrow.classList.add("a-date-picker__arrow_right")
-    arrow.innerText = "--->"
+    arrow.innerText = this.config.arrows?.rightArrowContent || "--->"
     arrow.addEventListener("click", () => this.nextMonth())
     return arrow
   }
@@ -135,6 +142,7 @@ class DatePicker {
   private renderArrow(): HTMLElement {
     const arrow = document.createElement("div")
     arrow.classList.add("a-date-picker__arrow")
+    addStyles(arrow, this.config.arrows?.styles)
     return arrow
   }
 
@@ -142,12 +150,15 @@ class DatePicker {
   private renderFooter(): void {
     const footer = document.createElement("div")
     footer.classList.add("a-date-picker__footer")
+    addStyles(footer, this.config.footer?.styles)
 
     if (this.config.todayButton.enabled) {
       const todayButton = document.createElement("button")
       todayButton.classList.add("a-date-picker__today-button")
       todayButton.addEventListener("click", () => this.today())
       todayButton.innerText = this.config.todayButton.text || ""
+
+      addStyles(todayButton, this.config.todayButton.styles)
 
       footer.appendChild(todayButton)
     }
@@ -176,7 +187,6 @@ class DatePicker {
 
   private destroyBoxes(): void {
     const content = document.querySelector(`${this.wrapper} .a-date-picker__content`)
-    // TODO: Finish, check is mounted
     if (content) {
       content.remove()
     }
@@ -185,10 +195,11 @@ class DatePicker {
   private renderBoxes(): void {
     const wrapper = document.createElement("div")
     wrapper.classList.add("a-date-picker__content")
+    addStyles(wrapper, this.config.content?.styles)
 
     for (let i = 0; i < this.days.length; i++) {
       const box = new WeekDayBox(this.days[i])
-      wrapper.appendChild(box.render())
+      wrapper.appendChild(box.render(this.config.weekdayBox?.styles))
     }
 
     const firstDate = (new Date(
@@ -205,7 +216,7 @@ class DatePicker {
         k + 1
       ))
 
-      const rendered = box.render()
+      const rendered = box.render(this.config.dateBox?.styles, this.config.dateBox?.todayStyles)
       if (k === 0) {
         rendered.classList.add(`a-date-picker__date_${firstDate.getDay() + 1}`)
       }
